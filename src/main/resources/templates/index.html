@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Books Record</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+	.table {
+		background-color: #ffffff;
+		border-radius: 5px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.table-info {
+		background-color: #007bff !important;
+		color: #fff;
+	}
+
+	.table-bordered th,
+	.table-bordered td {
+		padding: 15px;
+		vertical-align: middle;
+	}
+
+	.btn-success,
+	.btn-warning,
+	.btn-danger {
+		margin: 0 5px;
+	}
+
+	h1 {
+		text-align: center;
+		margin-top: 20px;
+		color: #007bff;
+		font-weight: bold;
+	}
+
+	h5 {
+		color: #999;
+		text-align: center;
+		margin-top: 20px;
+	}
+
+	.container {
+		margin-top: 50px;
+	}
+
+	.btn-container {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+</style>
+
+<body>
+	<div class="container">
+		<a href="addBook" class="btn btn-success">Add Book</a>
+		<h1>Books Record</h1>
+		<table class="table table-bordered border-primary">
+			<thead>
+				<tr class="table-info">
+					<th>Book Id</th>
+					<th>Book Name</th>
+					<th>Book Price</th>
+					<th>Action</th>
+				</tr>
+				<tr th:if="${record.empty}">
+					<td colspan="4">
+						<h5>No data available</h5>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="b:${record}">
+					<td th:text="${b.BOOKID}"></td>
+					<td th:text="${b.BOOKNAME}"></td>
+					<td th:text="${b.BOOKPRICE}"></td>
+					<td>
+						<a th:href="@{/delete?(BOOKID=${b.BOOKID})}" class="btn btn-danger"
+							onclick="return conDelete()">Delete</a>
+						<a th:href="@{/edit?(BOOKID=${b.BOOKID})}" class="btn btn-warning">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+<script>
+	function conDelete() {
+		return confirm("Are Delete Record...??")
+	}
+</script>
+
+</html>
